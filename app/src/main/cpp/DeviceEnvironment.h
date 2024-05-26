@@ -28,13 +28,6 @@ static const char* suBinariesPath[] = {
         nullptr
 };
 
-static const char* protectedAndroidPath[] = {
-        "/system/vendor",
-        "/data/adb",
-        "/data/local/tmp",
-        nullptr
-};
-
 /*
  * Effort:
  * - checking build tags
@@ -85,16 +78,11 @@ void emulatorCheck() {
 /*
  * Effort:
  * - checking su libraries
- * - checking permissions on protected paths
  */
 __attribute__((always_inline))
 void rootCheck() {
     for (int i = 0; suBinariesPath[i] != nullptr; i++) {
         if (isExist(suBinariesPath[i]) == 0) exitProgram("Beware, su binary detected!");
-    }
-
-    for (int i = 0; protectedAndroidPath[i] != nullptr; i++) {
-        if (isWriteable(protectedAndroidPath[i]) == 0) exitProgram("Beware, abnormal write access detected!");
     }
 }
 

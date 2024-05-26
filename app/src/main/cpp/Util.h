@@ -29,13 +29,8 @@ bool isStrEquals(const char *buf1, const char *buf2) {
 }
 
 __attribute__((always_inline))
-bool isExist(const char* path) {
+int isExist(const char* path) {
     return access(path, F_OK);
-}
-
-__attribute__((always_inline))
-bool isWriteable(const char* path) {
-    return access(path, R_OK | W_OK);
 }
 
 __attribute__((always_inline))
