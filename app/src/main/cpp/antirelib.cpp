@@ -1,5 +1,3 @@
-// skuuzie
-
 #include <jni.h>
 #include <android/log.h>
 #include <malloc.h>
@@ -16,10 +14,9 @@
 #include "AppEnvironment.h"
 #include "Util.h"
 
+__attribute__((always_inline))
 void detectAppState() {
     while (1) {
-        __android_log_print(ANDROID_LOG_DEBUG, "AntiRE", "bump");
-
         debuggerCheck();
         fridaCheck();
 
@@ -30,8 +27,6 @@ void detectAppState() {
 __attribute__((constructor))
 __attribute__((always_inline))
 void _() {
-    __android_log_print(ANDROID_LOG_DEBUG, "AntiRE", "MODULE LOADED");
-
     emulatorCheck();
     rootCheck();
     debuggerCheck();

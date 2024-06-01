@@ -4,10 +4,10 @@
 __attribute__((always_inline))
 void exitProgram(const char *msg) {
     if (msg != NULL) {
-        __android_log_print(ANDROID_LOG_DEBUG, "AntiRE", "%s", msg);
+        __android_log_print(ANDROID_LOG_INFO, "AntiRE", "%s", msg);
     }
-    // abort();
-    // raise(SIGABRT);
+    void *a = nullptr;
+    reinterpret_cast<unsigned char*>(a)[1] = 0xff;
 }
 
 __attribute__((always_inline))

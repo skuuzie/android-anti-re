@@ -28,12 +28,6 @@ static const char* suBinariesPath[] = {
         nullptr
 };
 
-/*
- * Effort:
- * - checking build tags
- * - checking model name
- * - checking for native bridge lib
- */
 __attribute__((always_inline))
 void emulatorCheck() {
     FILE *pipe;
@@ -75,10 +69,6 @@ void emulatorCheck() {
     }
 }
 
-/*
- * Effort:
- * - checking su libraries
- */
 __attribute__((always_inline))
 void rootCheck() {
     for (int i = 0; suBinariesPath[i] != nullptr; i++) {

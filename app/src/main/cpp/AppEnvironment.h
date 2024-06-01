@@ -17,15 +17,10 @@ static const char* fridaNamedPipe2 = "gdbus";
 
 static unsigned int MAX_BUFFER_SIZE = 256;
 
-/*
- * Effort:
- * - checking for active tracerpid in /proc/{self}/status
- * - looping through spawned process in /proc/{self}/task/{pids}/status, searching for "jdwp" and "gdb"
- */
 __attribute__((always_inline))
 void debuggerCheck() {
 
-    // Active TracerPID
+    // TracerPID
     char buffer[MAX_BUFFER_SIZE];
 
     int pos = 0;
@@ -63,7 +58,7 @@ void debuggerCheck() {
                 consize = strConcat(entry->d_name, pidStatus, 16);
                 strConcat("/status", pidStatus, consize + 16);
 
-                int fd = open(pidStatus, O_RDONLY);
+                fd = open(pidStatus, O_RDONLY);
                 read(fd, pidStatusFalseBuffer, 6);
                 read(fd, pidStatusBuffer, 5);
                 close(fd);
@@ -73,17 +68,13 @@ void debuggerCheck() {
                 if (isStrEquals(gdbNamedPipe1, pidStatusBuffer)) exitProgram("Beware, GDB detected!");
                 if (isStrEquals(gdbNamedPipe2, pidStatusBuffer)) exitProgram("Beware, GDB detected!");
 
-                memset(pidStatusBuffer, 0, 256);
+                memset(pidStatusBuffer, 0, MAX_BUFFER_SIZE);
             }
         }
     }
     closedir(dir);
 }
 
-/*
- * Effort:
- * - looping through spawned process in /proc/{self}/task/{pids}/status, searching for "gdmain" and "gdbus"
- */
 __attribute__((always_inline))
 void fridaCheck() {
 
