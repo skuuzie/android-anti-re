@@ -7,3 +7,5 @@ Some defense solution to protect android apps. utilizing c/c++ native code to de
 ### Note:
 
 This is only the foundation/starter code. actual integration on real apps should utilize further defense mechanism such as direct syscalls, code obfuscation, etc.
+
+![](demo.gif)
